@@ -2,7 +2,7 @@ package com.pro.service;
 
 import javax.jws.WebService;
 
-@WebService(targetNamespace = "http://service.ws.com/")
-public interface QueryDelegate {
+@WebService(targetNamespace = "http://webservice.ws.com/")
+public interface Query {
     public String query(String parameters);
 }

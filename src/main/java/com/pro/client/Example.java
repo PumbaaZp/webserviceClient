@@ -7,16 +7,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.jws.WebService;
 import javax.xml.namespace.QName;
 import javax.xml.ws.BindingProvider;
 import javax.xml.ws.Service;
 import javax.xml.ws.handler.MessageContext;
 
 import com.alibaba.fastjson.JSONObject;
-import com.pro.service.Query;
 
-public class QueryClient {
-    private static String WS_URL = "http://127.0.0.1:8080/ws/Query?wsdl";
+public class Example {
+    private static String WS_URL = "http://10.100.32.41:8893/ws/Query?wsdl";
+
     public static String getClient(String param) {
         URL url = null;
         try {
@@ -39,18 +40,18 @@ public class QueryClient {
     }
 
     public static void main(String[] args) throws Exception {
-        JSONObject jsonObject1 = new JSONObject();
-        jsonObject1.put("serviceName", "RESOURCE_DIRECTORY_VEHICLE_BY_PLATE");
-        jsonObject1.put("vehicleNo", "");
-        jsonObject1.put("plateColorCode", "");
-        jsonObject1.put("provinceCode", "");
-
-        JSONObject jsonObject2 = new JSONObject();
-        jsonObject2.put("serviceName", "T_LIMITS_JK");
-        jsonObject2.put("FLAG", "1");
-
-        String result = QueryClient.getClient(jsonObject1.toJSONString());
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("serviceName", "RESOURCE_DIRECTORY_PERSON_BY_ID_CARD");
+        jsonObject.put("idCard", "330726196710020512");
+        jsonObject.put("idType", "1");
+        jsonObject.put("provinceCode", "330000");
+        jsonObject.put("page", "1");        
+        String result = Example.getClient(jsonObject.toJSONString()); 
         System.out.println(result);
     }
 
+    @WebService(targetNamespace = "http://webservice.ws.com/")
+    public static interface Query{
+        public String query(String parameters);
+    }
 }

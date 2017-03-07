@@ -12,7 +12,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.alibaba.fastjson.JSONObject;
-import com.pro.service.QueryDelegate;
+import com.pro.service.Query;
 
 public class QueryByClientXML {
 
@@ -21,9 +21,9 @@ public class QueryByClientXML {
 
     public static void main(String[] args) {
 
-        QueryDelegate queryDelegate = (QueryDelegate) context.getBean("QueryClient");
+        Query query = (Query) context.getBean("QueryClient");
 
-        Map<String, Object> req_ctx = ((BindingProvider) queryDelegate).getRequestContext();
+        Map<String, Object> req_ctx = ((BindingProvider) query).getRequestContext();
         Map<String, List<String>> headers = new HashMap<String, List<String>>();
         headers.put("Username", Collections.singletonList("TEST"));
         headers.put("Password", Collections.singletonList("TEST"));
@@ -35,7 +35,7 @@ public class QueryByClientXML {
         jsonObject.put("idType", 1);
         jsonObject.put("provinceCode", "330000");
 
-        String result = queryDelegate.query(jsonObject.toJSONString());
+        String result = query.query(jsonObject.toJSONString());
         System.out.println(result);
 
     }
